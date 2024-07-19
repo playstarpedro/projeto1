@@ -279,7 +279,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Cliente cliente = new Cliente(nome, cpf, telefone, endereco, numero, cidade, estado);
         Boolean isCadastrado = this.clienteDAO.cadastrar(cliente);
         if (isCadastrado) {
-            modelo.addRow(new Object[]{cliente.getNome(), cliente.getCpf()});
+            modelo.addRow(new Object[]{cliente.getNome(), cliente.getCpf(), cliente.getTel(), cliente.getNumero(), cliente.getCidade(), cliente.getEstado(), cliente.getEnd()});
             limparCampos();
         } else {
             JOptionPane.showMessageDialog(null, "Cliente já se encontra cadastrado", "ATENÇÃO",JOptionPane.INFORMATION_MESSAGE);
@@ -411,6 +411,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initCustomComponents() {
         modelo.addColumn("Nome");
         modelo.addColumn("CPF");
+        modelo.addColumn("Telefone");
+        modelo.addColumn("Número");
+        modelo.addColumn("Cidade");
+        modelo.addColumn("Estado");
+        modelo.addColumn("Endereço");
         
         tableClientes.setModel(modelo);
         
