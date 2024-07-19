@@ -220,10 +220,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
         int linhaSelecionanda = tableClientes.getSelectedRow();
-        Long cpf = (Long) tableClientes.getValueAt(linhaSelecionanda, 1);
-        this.clienteDAO.excluir(cpf);
-        modelo.removeRow(linhaSelecionanda);
-        JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso!", "ATENÇÃO",JOptionPane.INFORMATION_MESSAGE);
+        
+        if (linhaSelecionanda >= 0) {
+            int result = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir este cliente?", "CUIDADO",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            
+            if (result == JOptionPane.YES_OPTION) {
+                
+                Long cpf = (Long) tableClientes.getValueAt(linhaSelecionanda, 1);
+                this.clienteDAO.excluir(cpf);
+                modelo.removeRow(linhaSelecionanda);
+                
+                JOptionPane.showMessageDialog(null, "Cliente excluído com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                limparCampos();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Nenhum cliente selecionado", "Erro", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
