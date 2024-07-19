@@ -265,13 +265,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nome = txtNome.getText();
         String cpf = txtCpf.getText();
+        String telefone = txtTelefone.getText();
+        String numero = txtNumero.getText();
+        String cidade = txtCidade.getText();
+        String estado = txtEstado.getText();
+        String endereco = txtEndereco.getText();
         
         if (!isCamposValidos(nome, cpf)) {
             JOptionPane.showMessageDialog(null, "Existem campos a serem preenchidos ", "ATENÇÃO", JOptionPane.INFORMATION_MESSAGE);
             return;    
         }
         
-        Cliente cliente = new Cliente(nome, cpf, cpf, null, cpf, null, null);
+        Cliente cliente = new Cliente(nome, cpf, telefone, endereco, numero, cidade, estado);
         Boolean isCadastrado = this.clienteDAO.cadastrar(cliente);
         if (isCadastrado) {
             modelo.addRow(new Object[]{cliente.getNome(), cliente.getCpf()});
@@ -294,6 +299,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         txtNome.setText(cliente.getNome());
         txtCpf.setText(cliente.getCpf().toString());
+        txtTelefone.setText(cliente.getTel().toString());
+        txtNumero.setText(cliente.getNumero().toString());
+        txtCidade.setText(cliente.getCidade());
+        txtEstado.setText(cliente.getEstado());
+        txtEndereco.setText(cliente.getEnd());
     }//GEN-LAST:event_tableClientesMouseClicked
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -409,5 +419,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void limparCampos() {
         txtNome.setText("");
         txtCpf.setText("");
+        txtTelefone.setText("");
+        txtNumero.setText("");
+        txtCidade.setText("");
+        txtEstado.setText("");
+        txtEndereco.setText("");
     }
 }
